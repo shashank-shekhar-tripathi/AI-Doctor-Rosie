@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        section {
+        background-image: url("ani2.gif");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+        .form {
+        /* border: 1px solid purple; */
+        /* box-shadow: 1px 1px 10px 10px pink; */
+        animation: move 1s alternate-reverse infinite;
+        animation-name: move;
+      }
+      .ani{
+        animation: new 1s;
+        animation-iteration-count: 1;
+animation-direction: normal;      }
+      @keyframes new{
+        from{
+            position: relative;
+            left:-25vw;
+            z-index: -1;
+        }
+        to{
+            position: relative;
+            left:15px;
+            z-index:1;
+        }
+      }
+      @keyframes move {
+        from {
+          margin-top: -10px;
+        }
+        to {
+          margin-top: 10px;
+        }
+      }
+button:hover{
+    background-color: purple;
+    color: white;
+    cursor: pointer;
+}
+      button,input{
+        border:1px solid pink;
+        outline:pink;
+        transition: 0.5s all;
+      }
+      input[type="checkbox"] {
+      accent-color: pink;
+      padding:5px;
+      outline:pink;
+      transition: none; 
+    }
+      input:focus{
+        border: 7px solid pink;
+      }
+    </style>
+    <link rel="stylesheet" href="memo.css">
+  </head>
+  <body>
+    <section class="  ">
+      <div
+        class="flex items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+      >
+        <div
+          class="w-full form bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
+        >
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8 ">
+            <h1
+              class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
+            >
+              Patient Details
+            </h1>
+            <div class="space-y-4 md:space-y-6" >
+              <div>
+                <label
+                  for="name"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Patient Name</label
+                >
+                <input
+                  type="name"
+                  name="name"
+                  id="name"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John Doe"
+                  required=""
+                />
+              </div>
+              <div></div>
+              
+              <div class="flex gap-2">
+                <div>
+                  <label
+                    for="Gender"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Patient Gender</label
+                  >
+                  <input
+                    type="text"
+                    name="gender"
+                    id="gender"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Male / Female"
+                    required=""
+                  />
+                </div>
+                <div>
+                  <label
+                    for="age"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Patient Age</label
+                  >
+                  <input
+                    type="number"
+                    name="age"
+                    id="age"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="45"
+                    required=""
+                  />
+                </div>
+              </div>
+             
+              
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              onclick="auth()" style="color: white;">
+                Register Patient
+              </button>
+              <!-- <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                Already have an account?
+                <a
+                  href="Auth.html"
+                  class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  >Sign In</a
+                >
+              </p> -->
+            </form>
+          </div>
+        </div>
+        <!-- <section class="ani form w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0" 
+        >
+        <img src="ani.gif" alt="">  
+    </section> -->
+      </div>
+    </section>
+    
+    <script src="script.js"></script>
+    <script>
+        function auth (){
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const gender = document.getElementById("gender").value;
+            if (!name || !age || !gender){
+                alert("All data must be filled");
+                return;
+            }
+            localStorage.setItem('name',name);
+            localStorage.setItem('age',age);
+            localStorage.setItem('gender',gender);
+            localStorage.setItem('issue',"");
+            window.location.href = window.location.origin+"/AI-Doctor-Rosie/dashboard.html"
+
+        }
+        </script>
+  </body>
+</html>

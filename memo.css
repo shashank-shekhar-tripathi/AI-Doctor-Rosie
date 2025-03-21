@@ -1,0 +1,29 @@
+
+.ani{
+    border:20px solid rgb(228, 61, 88);
+    border-radius:0 30px 30px 0;
+    border-left: none;
+    margin-left: -4px;
+    z-index: 1;
+}
+
+.form{
+    z-index: 2;
+}
+
+.form{
+    border-radius:0 30px 30px 0;
+    /* border:20px solid rgb(228, 61, 88); */
+    border: 1px solid pink;
+    box-shadow: 1px 1px 10px 10px pink;
+    
+}
+.ani img{
+    border-radius:0 30px 30px 0;
+}
+section {
+    background-image: url("ani2.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }

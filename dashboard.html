@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <div class="nav">
+        <div class="logo"><img src="logo.avif" alt=""></div> 
+        <h1>AI Powered Smart Symptom Checker</h1>
+        <div class="rightTop"><i class="ri-more-2-fill"></i></div>
+      </div>
+
+      <div class="page1">
+        <h1 class=" ">Hey, <span> Friends  <i class="ri-sparkling-2-line sparkle"></i></span><br> How can I help you? </h1>
+        
+      </div>
+
+      <div class="page2">
+        <div class="items animate-bounce duration-2 ">
+        <h2>Fever </h2>
+        <h2>Fatigue </h2>
+        <h2>Muscle aches</h2>
+        <h2> Cough</h2>
+        <h2> Diarrhea</h2>
+        <h2> Vomiting </h2>
+        <h2>Headaches</h2>
+         </div>
+      </div>
+     
+
+
+      <div class="bottom">
+        <div class="icon"><i class="ri-add-fill"></i></div>
+        <div class="searchBox"><input id="issue"  type="text" placeholder="Type message here...">
+            <i class="ri-voice-ai-line"></i>
+        </div>
+        <div class="icon" onclick="call()"><i class="ri-send-plane-2-line"></i></div>
+      </div>
+
+      <div class="result">
+        <textarea name="" id="result" class="" readonly>
+             
+        </textarea>
+      </div>
+    </div>
+    
+    <script>
+      async function call(){
+
+        const input = document.getElementById('issue').value;
+        data = {
+        "name":localStorage.name,
+        "age":localStorage.age,
+        "gender":localStorage.gender,
+      }
+        const result = await getGeminiResponse(input,data);
+        document.getElementById('result').innerHTML =`${result}`;
+      }
+
+      const API_KEY = "AIzaSyDd5pVlOfMw9nDIx0L-Txdix5aotMlkgi0";
+      const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+      console.log(localStorage)
+      // data = {
+      //   "name":localStorage.name,
+      //   "age":localStorage.age,
+      //   "gender":localStorage.gender,
+      // }
+      async function getGeminiResponse(issue, data) {
+        const prompt = `"Create a health suggestion with data: Name: ${data.name}, Gender: ${data.gender}, Age: ${data.age}, symptoms :${issue}. make it brief and don't include unnessary details just give me probable reasons, consequnces and required medication. don't use ** for bold"`;
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+          }),
+        });
+
+        const result = await response.json();
+        console.log(result.candidates[0].content.parts[0].text);
+        // alert(result);
+        return result.candidates[0].content.parts[0].text;
+      }
+    </script>
+  </body>
+</html>
